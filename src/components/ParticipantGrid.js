@@ -8,6 +8,7 @@ const MemoizedParticipant = React.memo(
     return prevProps.participantId === nextProps.participantId;
   }
 );
+console.log(ParticipantView);
 
 function ParticipantGrid({ participantIds, isPresenting }) {
   const { sideBarMode } = useMeetingAppContext();

@@ -5,9 +5,12 @@ import "./index.css";
 import App from "./App";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SignUp from "./components/loginPage";
 
 const root = createRoot(document.getElementById("root"));
+let flag = true;
 root.render(
+
   <>
     <ToastContainer
       toastClassName={() =>
@@ -24,8 +27,8 @@ root.render(
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="light"
+      theme="dark"
     />
-    <App />
+    {flag?<SignUp/>:<App />}
   </>
 );

@@ -125,8 +125,10 @@ export function MeetingContainer({
 
   function onParticipantJoined(participant) {
     // Change quality to low, med or high based on resolution
+    console.log(participant);
     participant && participant.setQuality("high");
   }
+
 
 
   function onEntryResponded(participantId, name) {
@@ -187,7 +189,7 @@ export function MeetingContainer({
   });
 
   const isPresenting = mMeeting.presenterId ? true : false;
-
+  console.log("naa tha eirukan laaa",mMeeting.localParticipant?.displayName);
   useEffect(() => {
     const debounceTimeout = setTimeout(() => {
       const participantIds = Array.from(mMeeting.participants.keys());
@@ -233,6 +235,7 @@ export function MeetingContainer({
       participantRaisedHand(senderId);
     },
   });
+
 
   usePubSub("CHAT", {
     onMessageReceived: (data) => {
