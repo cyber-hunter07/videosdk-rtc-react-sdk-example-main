@@ -158,30 +158,6 @@ function PipBTN({ isMobile, isTab }) {
 
 
 const ScreenCaptureToPDF = ({reference}) => {
-  // const captureRef = useRef(null);
-
-  // const handleCapture = async () => {
-  //   if (!reference.current) {
-  //     console.error("Error: captureRef is null or undefined.");
-  //     return;
-  //   }
-  
-  //   try {
-  //     const name = "Vishnuprasad"; // Change this to dynamic name if needed
-  //     const timestamp = new Date().toLocaleString();
-  //     const canvas = await html2canvas(reference.current);
-  //     const imgData = canvas.toDataURL("image/png");
-  
-  //     const pdf = new jsPDF();
-  //     pdf.text(`Name: ${name}`, 10, 10);
-  //     pdf.text(`Timestamp: ${timestamp}`, 10, 20);
-  //     pdf.addImage(imgData, "PNG", 10, 30, 190, 0);
-  //     // Save PDF
-  //     pdf.save(`screenshot_${Date.now()}.pdf`);
-  //   } catch (error) {
-  //     console.error("Error capturing screen:", error);
-  //   }
-  // };
   const handleCaptureAndSend = async () => {
     try {
       // const captureRef = useRef(null);
