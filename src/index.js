@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 // import ReactDOM from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -17,6 +17,7 @@ root.render(
       bodyClassName={() => "text-black text-base font-normal"}
       position="bottom-left"
       autoClose={4000}
+     toastStyle={{ color: "black" }}
       hideProgressBar={true}
       newestOnTop={false}
       closeButton={false}
