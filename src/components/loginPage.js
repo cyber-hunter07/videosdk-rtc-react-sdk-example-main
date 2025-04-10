@@ -1,14 +1,34 @@
 // App.jsx
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaFacebookF, FaGoogle, FaApple } from "react-icons/fa";
+import { toast } from "react-toastify";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+import { loginContext } from "../App";
 
 export default function App() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+const {setLoadFlag,setButtonFlag} = useContext(loginContext);
   const particlesInit = async (engine) => {
     await loadSlim(engine);
+  };
+
+  const loginHandler = () => {
+    if (email === "professor@rgcet.com" && password === "rgcet") {
+      toast.success("Login successful!");
+      setLoadFlag(false)
+      setButtonFlag(true)
+    } else if (email === "students@rgcet.com" && password === "student@rgcet") {
+      toast.success(" Student Login successful!");
+      setLoadFlag(false)
+      setButtonFlag(false)
+    } else if (!email || !password) {
+      toast.error("Please fill in all fields");
+      setLoadFlag(true)
+      return;
+    }
   };
 
   return (
@@ -25,6 +45,8 @@ export default function App() {
             <label className="block text-gray-700 mb-1">E-mail</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="example@email.com"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -34,7 +56,10 @@ export default function App() {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="********"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <span
@@ -47,6 +72,7 @@ export default function App() {
           </div>
           <button
             type="submit"
+            onClick={loginHandler}
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             Login

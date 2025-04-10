@@ -1,16 +1,14 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 // import ReactDOM from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SignUp from "./components/loginPage";
+
 
 const root = createRoot(document.getElementById("root"));
-let flag = true;
 root.render(
-
   <>
     <ToastContainer
       toastClassName={() =>
@@ -29,6 +27,6 @@ root.render(
       pauseOnHover
       theme="dark"
     />
-    {flag?<SignUp/>:<App />}
+    <App />
   </>
 );

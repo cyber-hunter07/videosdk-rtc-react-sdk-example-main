@@ -4,7 +4,7 @@ import {
   usePubSub,
   useMediaDevice,
 } from "@videosdk.live/react-sdk";
-import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import React, { Fragment, useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ClipboardIcon,
   CheckIcon,
@@ -36,6 +36,7 @@ import useMediaStream from "../../hooks/useMediaStream";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import axios from "axios";
+import { loginContext } from "../../App";
 
 function PipBTN({ isMobile, isTab }) {
   const { pipMode, setPipMode } = useMeetingAppContext();
@@ -543,8 +544,9 @@ const WebCamBTN = () => {
   );
 };
 
-export function BottomBar({ bottomBarHeight, setIsMeetingLeft,captureRef }) {
+export function BottomBar({ bottomBarHeight, setIsMeetingLeft,captureRef}) {
   const { sideBarMode, setSideBarMode } = useMeetingAppContext();
+  const {buttonFlag} = useContext(loginContext);
   const RaiseHandBTN = ({ isMobile, isTab }) => {
     const { publish } = usePubSub("RAISE_HAND");
     const RaiseHand = () => {
@@ -922,7 +924,7 @@ export function BottomBar({ bottomBarHeight, setIsMeetingLeft,captureRef }) {
         <ScreenShareBTN isMobile={isMobile} isTab={isTab} />
         <PipBTN isMobile={isMobile} isTab={isTab} />
         <LeaveBTN />
-        <ScreenCaptureToPDF reference={captureRef}/>
+        {buttonFlag?<ScreenCaptureToPDF reference={captureRef}/>:''}
       </div>
       <div className="flex items-center justify-center">
         <ChatBTN isMobile={isMobile} isTab={isTab} />

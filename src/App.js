@@ -1,10 +1,12 @@
 import { MeetingProvider } from "@videosdk.live/react-sdk";
 import { useEffect } from "react";
-import { useState } from "react";
+import { createContext,useState } from "react";
 import { MeetingAppProvider } from "./MeetingAppContextDef";
 import { MeetingContainer } from "./meeting/MeetingContainer";
 import { LeaveScreen } from "./components/screens/LeaveScreen";
 import { JoiningScreen } from "./components/screens/JoiningScreen"
+import SignUp from "./components/loginPage";
+export const loginContext = createContext();
 
 function App() {
   const [token, setToken] = useState("");
@@ -16,7 +18,8 @@ function App() {
   const [customVideoStream, setCustomVideoStream] = useState(null)
   const [isMeetingStarted, setMeetingStarted] = useState(false);
   const [isMeetingLeft, setIsMeetingLeft] = useState(false);
-
+  const [loadFlag, setLoadFlag] = useState(true);
+  const [buttonFlag,setButtonFlag] = useState(false);
   const isMobile = window.matchMedia(
     "only screen and (max-width: 768px)"
   ).matches;
@@ -31,6 +34,8 @@ function App() {
 
   return (
     <>
+     <loginContext.Provider value={{setLoadFlag,setButtonFlag,buttonFlag}}>
+    {loadFlag?<SignUp/>:
       <MeetingAppProvider>
         {isMeetingStarted ? (
 
@@ -58,6 +63,8 @@ function App() {
                 setMeetingStarted(false);
               }}
               setIsMeetingLeft={setIsMeetingLeft}
+              buttonFlag={buttonFlag}
+              loginFlag={loadFlag}
             />
           </MeetingProvider>
 
@@ -85,7 +92,8 @@ function App() {
             setIsMeetingLeft={setIsMeetingLeft}
           />
         )}
-      </MeetingAppProvider>
+      </MeetingAppProvider>}
+      </loginContext.Provider>
     </>
   );
 }
