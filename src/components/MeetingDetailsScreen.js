@@ -1,6 +1,7 @@
 import { CheckIcon, ClipboardIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { loginContext } from "../App";
 
 export function MeetingDetailsScreen({
   onClickJoin,
@@ -14,7 +15,7 @@ export function MeetingDetailsScreen({
   const [isCopied, setIsCopied] = useState(false);
   const [iscreateMeetingClicked, setIscreateMeetingClicked] = useState(false);
   const [isJoinMeetingClicked, setIsJoinMeetingClicked] = useState(false);
-
+const {buttonFlag} = useContext(loginContext)
   return (
     <div
       className={`flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-1 p-1.5`}
@@ -91,7 +92,7 @@ export function MeetingDetailsScreen({
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
         <div className="w-full md:mt-0 mt-4 flex flex-col">
           <div className="flex items-center justify-center flex-col w-full ">
-            <button
+           { buttonFlag ? <button
               className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
               onClick={async (e) => {
                 const { meetingId, err } = await _handleOnCreateMeeting();
@@ -117,7 +118,7 @@ export function MeetingDetailsScreen({
               }}
             >
               Create a meeting
-            </button>
+            </button>:''}
             <button
               className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
               onClick={(e) => {
